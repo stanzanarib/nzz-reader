@@ -1,4 +1,13 @@
-export function TopicSidebar({ activeTopics, onToggleTopic, onReset }: any) {
+
+
+interface SideBarProps {
+     activeTopics: string[];
+     onToggleTopic: (id:string) => void;
+     onReset: () => void;
+}
+
+
+export function TopicSidebar({ activeTopics, onToggleTopic, onReset }:SideBarProps) {
   const NZZ_TOPICS = [{id: 'politik', name: 'Politik'}, {id: 'wirtschaft', name: 'Wirtschaft'}, {id: 'feuilleton', name: 'Feuilleton'}, {id: 'sport', name: 'Sport'}, {id: 'wissenschaft', name: 'Wissenschaft'}, {id: 'meinung', name: 'Meinung'}, {id: 'international', name: 'International'}, {id: 'zuerich', name: 'Zürich'}];
   
   return (
@@ -9,7 +18,7 @@ export function TopicSidebar({ activeTopics, onToggleTopic, onReset }: any) {
           const isActive = activeTopics.includes(t.id);
           return (
             <button key={t.id} onClick={() => onToggleTopic(t.id)} 
-              className={`flex items-center justify-between px-2 py-1.5 text-left text-xs ${isActive ? 'bg-primary text-primary-foreground font-bold' : 'hover:bg-accent'}`}>
+              className={`flex items-center justify-between px-2 py-1.5 text-left text-xs ${isActive ? 'bg-primary text-white font-bold' : 'hover:bg-accent'}`}>
               {t.name} {isActive && <span className="ml-2 text-[8px]">●</span>}
             </button>
           );
