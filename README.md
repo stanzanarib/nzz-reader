@@ -25,4 +25,4 @@ Given an additional 48 hours, I would refine the user experience and codebase st
 
 ***
 
-*Note: Remember to update the Service to "Bust" the Cache after working on the PermissionHandler.*
+
