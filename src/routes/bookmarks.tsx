@@ -15,7 +15,7 @@ function BookmarksPage() {
   
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['articles', 'all'],
-    queryFn: () => fetchFeed({ page: 0, pageSize: 100 }),
+    queryFn: () => fetchFeed({ page: 0 }),
   })
 
   // Filter based on stored IDs

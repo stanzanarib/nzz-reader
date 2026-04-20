@@ -10,6 +10,7 @@ import { fetchFeed } from '../api/mockApi'
 import { SearchInput } from '../components/search/SearchInput'
 import { SearchResultList } from '../components/search/SearchResultList'
 import { ErrorDisplay } from '../components/ErrorDisplay'
+import { useDebounce } from '#/components/utils.ts/debounce'
 
 const searchSchema = z.object({ 
   q: z.string().catch('') 
@@ -20,26 +21,31 @@ export const Route = createFileRoute('/search')({
   component: SearchPage,
 })
 
+
+
 function SearchPage() {
   const { q } = Route.useSearch()
   const navigate = useNavigate({ from: '/search' })
   const [localQuery, setLocalQuery] = useState(q)
+  
+  // Debounce the local query - waits 300ms after user stops typing
+  const debouncedQuery = useDebounce(localQuery, 300)
 
   // Sync internal input state with URL search params
   useEffect(() => {
     setLocalQuery(q)
   }, [q])
 
+  // Auto-update URL when debounced query changes
+  useEffect(() => {
+    navigate({ search: { q: debouncedQuery } })
+  }, [debouncedQuery, navigate])
+
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['search', q],
     queryFn: () => fetchFeed({ q }),
     enabled: q.length > 0,
   })
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    navigate({ search: { q: localQuery } })
-  }
 
   return (
     <main className="page-container px-4 pb-20 pt-10">
@@ -52,7 +58,6 @@ function SearchPage() {
             setLocalQuery(''); 
             navigate({ search: { q: '' } }); 
           }}
-          onSubmit={handleSearch}
         />
       </section>
 
