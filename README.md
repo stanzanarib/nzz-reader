@@ -12,7 +12,7 @@ I have developed a robust, responsive web application for browsing, searching, a
 ## What I Skipped and Why
 * **Scroll Position Preservation on Back Navigation:** * **Reason:** While I successfully implemented URL-based state for pagination and filters, restoring the exact scroll position upon returning to the feed requires capturing the window scroll offset and managing it via the History API or a Viewport Scroll restoration service. Given the time constraints, I prioritized implementing a highly robust URL-state management system over native scroll restoration, as the former is critical for sharing and re-loading, while the latter is a secondary UX enhancement.
 * **Extended Test Coverage:**
-    * **Reason:** While I have implemented critical tests for the Bookmark store logic and URL-state synchronization, the testing suite for the UI components is currently limited. I focused my testing efforts on the "trickiest logic"—the data integrity and state synchronization—rather than on low-level component rendering, to ensure the core functionality is bulletproof under edge-case scenarios.
+    * **Reason:** While I have implemented critical tests for the Bookmark store logic and URL-state synchronization, the testing suite for the UI components is currently limited. I focused my testing efforts on the "trickiest logic" the data integrity and state synchronization rather than on low-level component rendering, to ensure the core functionality is bulletproof under edge-case scenarios.
 
 ## Where I’d Go with Another Two Days
 Given an additional 48 hours, I would refine the user experience and codebase stability:
